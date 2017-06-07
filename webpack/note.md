@@ -8,5 +8,5 @@ https://github.com/1337programming/webpack-shell-plugin
 # expose your Jquey as $, use expose-loader
 https://github.com/webpack/webpack/issues/2800
 
-**for more loaders**
+**for more loaders**  
 https://webpack.js.org/loaders/worker-loader/#install
