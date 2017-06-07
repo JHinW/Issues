@@ -9,4 +9,7 @@ https://github.com/1337programming/webpack-shell-plugin
 https://github.com/webpack/webpack/issues/2800
 
 **for more loaders**  
-https://webpack.js.org/loaders/worker-loader/#install
+https://webpack.js.org/loaders/worker-loader/#install  
+
+**solutions if you want to disable some loaders in configuration**  
+https://webpack.github.io/docs/loaders.html
