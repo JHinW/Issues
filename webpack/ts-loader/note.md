@@ -1,5 +1,5 @@
 # tsconfig.json to see Compiler Options usage
-
+**List of path mapping entries for module names to locations relative to the baseUrl. See Module Resolution documentation for more details.**  
 ```json
 {
       "compilerOptions": {
