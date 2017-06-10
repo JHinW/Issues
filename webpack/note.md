@@ -13,3 +13,11 @@ https://webpack.js.org/loaders/worker-loader/#install
 
 **solutions if you want to disable some loaders in configuration**  
 https://webpack.github.io/docs/loaders.html
+
+
+# server side bunlde using webpack2  
+**specify target platform**  
+https://webpack.js.org/concepts/targets/  
+
+**use externals property**  
+https://www.npmjs.com/package/webpack-node-externals  
