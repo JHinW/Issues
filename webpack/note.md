@@ -21,3 +21,7 @@ https://webpack.js.org/concepts/targets/
 
 **use externals property**  
 https://www.npmjs.com/package/webpack-node-externals  
+
+
+# how to generate sourcemap from ts using webpack2  
+https://github.com/shama/webpack-stream/issues/81#issuecomment-243436780  
