@@ -24,4 +24,6 @@ https://www.npmjs.com/package/webpack-node-externals
 
 
 # how to generate sourcemap from ts using webpack2  
+**inspired by below link**  
+http://barinskis.me/blog/2016/09/03/webpack-2-x-and-source-maps/  
 https://github.com/shama/webpack-stream/issues/81#issuecomment-243436780  
