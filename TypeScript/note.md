@@ -3,3 +3,6 @@ https://stackoverflow.com/questions/38877424/what-is-the-type-keyword-when-used-
 
 # difference between type and interface  
 https://stackoverflow.com/questions/36782896/in-typescript-what-is-the-difference-between-type-and-interface  
+
+**understand modules when using modules in TS**  
+https://www.typescriptlang.org/docs/handbook/modules.html    
