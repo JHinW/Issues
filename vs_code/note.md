@@ -12,7 +12,7 @@ https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-
 https://github.com/Microsoft/vscode-chrome-debug  
 https://github.com/Microsoft/vscode-node-debug2  
 
-**use sourceMapPathOverrides if sourceMap is out from webpack2**  
+**use sourceMapPathOverrides property in launch.json configurations section if sourceMap is out from webpack2**  
 ```json
 {
     "sourceMapPathOverrides": {
