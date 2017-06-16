@@ -34,3 +34,20 @@
       ]
 }
 ```
+
+
+# ts-loader trapped me a lot, awesome-typescript-loader saves me
+https://github.com/s-panferov/awesome-typescript-loader  
+
+
+**awesomeTypescriptLoaderOptions**  
+https://github.com/s-panferov/awesome-typescript-loader/issues/372  
+```json
+{
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "useCache": true,
+        "useTranspileModule": true
+    }
+}
+```
