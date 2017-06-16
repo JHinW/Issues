@@ -1,5 +1,4 @@
 # OAuth in Azure Active Directory  
-https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code  
 **Get public Key for challenging access token from**  
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code  
 
