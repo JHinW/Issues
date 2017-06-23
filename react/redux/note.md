@@ -8,3 +8,6 @@ https://github.com/reactjs/redux/tree/master/examples
 
 **redux-thunk => how async or promise result be chained unitl the end of final action**  
 https://github.com/gaearon/redux-thunk  
+
+**how react remove hash from the URL**  
+http://redux.js.org/docs/advanced/UsageWithReactRouter.html  
