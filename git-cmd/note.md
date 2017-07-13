@@ -8,5 +8,3 @@ https://stackoverflow.com/questions/3471827/how-do-i-list-all-remote-branches-in
 **How do I delete a Git branch both locally and remotely?**    
 https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely  
 
-**how convert pfx to crt and key**  
-https://www.markbrilman.nl/2011/08/howto-convert-a-pfx-to-a-seperate-key-crt-file/  
