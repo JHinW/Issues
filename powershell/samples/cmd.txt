@@ -1,0 +1,3 @@
+openssl pkcs12 -in cert.pfx  -nocerts -out cert.key
+
+openssl pkcs12 -in cert.pfx  -clcerts -nokeys -out cert.crt

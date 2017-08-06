@@ -7,3 +7,4 @@ https://stackoverflow.com/questions/3471827/how-do-i-list-all-remote-branches-in
 
 **How do I delete a Git branch both locally and remotely?**    
 https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely  
+
