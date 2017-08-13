@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace SF.Async.Entry
+namespace SF.Async.Logic.Entry
 {
     internal static class Program
     {

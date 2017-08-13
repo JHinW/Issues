@@ -30,7 +30,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SF.Async.Entry\SF.Async.Entry.csproj" />
+    <ProjectReference Include="..\SF.Async.Logic.Entry\SF.Async.Logic.Entry.csproj" />
     <ProjectReference Include="..\SF.Async.StatelessWeb\SF.Async.StatelessWeb.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

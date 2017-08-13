@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace SF.Async.Entry
+namespace SF.Async.Logic.Entry
 {
     [EventSource(Name = "MyCompany-SF.Async.App-Entry")]
     internal sealed class ServiceEventSource : EventSource
