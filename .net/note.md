@@ -10,6 +10,8 @@ https://msdn.microsoft.com/en-us/library/system.iasyncresult(v=vs.110).aspx
 https://stackoverflow.com/questions/7106454/are-c-sharp-events-synchronous  
 
 
+**thread pool**  
+https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/threading/how-to-use-a-thread-pool  
 
 
 
