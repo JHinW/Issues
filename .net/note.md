@@ -6,5 +6,10 @@ https://stackoverflow.com/questions/1712741/why-does-asynchronous-delegate-metho
 **get result from IAsyncResult Interface**  
 https://msdn.microsoft.com/en-us/library/system.iasyncresult(v=vs.110).aspx  
 
+**how do events excute async or sync?**  
+https://stackoverflow.com/questions/7106454/are-c-sharp-events-synchronous  
+
+
+
 
 
