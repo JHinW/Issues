@@ -85,6 +85,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SF.Async.Logic.Interfaces\SF.Async.Logic.Interfaces.csproj">
+      <Project>{ab88c03f-4c11-498f-b272-1ff0a30c2312}</Project>
+      <Name>SF.Async.Logic.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
