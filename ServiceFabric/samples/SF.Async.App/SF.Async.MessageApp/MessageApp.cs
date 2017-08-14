@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
-using SF.Async.Logic.Interfaces;
 
-namespace SF.Async.Logic.Entry
+namespace SF.Async.MessageApp
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class Entry : StatefulService, IEntry
+    internal sealed class MessageApp : StatefulService
     {
-        public Entry(StatefulServiceContext context)
+        public MessageApp(StatefulServiceContext context)
             : base(context)
         { }
 
@@ -64,26 +63,6 @@ namespace SF.Async.Logic.Entry
 
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }
-        }
-
-        Task<object> ILuisService.GetIntention(string text)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<byte[]> IAudioService.Pcm2Wav(byte[] pcmBytes)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<object> ISpeechService.SendAudio(byte[] wavBytes, int length)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<byte[]> IAudioService.Silk2Pcm(byte[] silkBytes)
-        {
-            throw new NotImplementedException();
         }
     }
 }

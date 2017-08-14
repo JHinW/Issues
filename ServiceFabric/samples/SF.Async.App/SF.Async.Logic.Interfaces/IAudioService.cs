@@ -8,8 +8,8 @@ namespace SF.Async.Logic.Interfaces
 {
     public interface IAudioService
     {
-        byte[] Silk2Pcm(byte[] silkBytes);
+        Task<byte[]> Silk2Pcm(byte[] silkBytes);
 
-        byte[] Pcm2Wav(byte[] pcmBytes);
+        Task<byte[]> Pcm2Wav(byte[] pcmBytes);
     }
 }

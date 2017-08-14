@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Logic.Interfaces
+namespace SF.Async.Interfaces
 {
-    public interface ILuisService
+    public interface IAwaitableSource<T>
+        where T: class
     {
-        Task<Object> GetIntention(string text);
+        Task<T> GetAwaitableSource();
     }
 }
