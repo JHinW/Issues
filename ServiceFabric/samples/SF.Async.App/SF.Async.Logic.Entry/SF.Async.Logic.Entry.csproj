@@ -72,6 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SF.Async.Interfaces\SF.Async.Interfaces.csproj">
+      <Project>{549B9BA9-D964-479F-8295-B17B5281066D}</Project>
+      <Name>SF.Async.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SF.Async.Logic.Interfaces\SF.Async.Logic.Interfaces.csproj">
       <Project>{ab88c03f-4c11-498f-b272-1ff0a30c2312}</Project>
       <Name>SF.Async.Logic.Interfaces</Name>

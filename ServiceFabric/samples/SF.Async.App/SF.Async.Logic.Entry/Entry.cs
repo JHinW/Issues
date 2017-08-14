@@ -8,6 +8,9 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SF.Async.Logic.Interfaces;
+using SF.Async.Interfaces;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace SF.Async.Logic.Entry
 {
@@ -68,11 +71,30 @@ namespace SF.Async.Logic.Entry
 
         Task<object> ILuisService.GetIntention(string text)
         {
+            // message wrapper
+            var wrapper = new MessageWrapper
+            {
+                MessageType = typeof(string).FullName,
+                Payload = text
+            };
+
             throw new NotImplementedException();
         }
 
         Task<byte[]> IAudioService.Pcm2Wav(byte[] pcmBytes)
         {
+            var stream = new MemoryStream();
+            var Serializer = new DataContractJsonSerializer(typeof(byte[]));
+            Serializer.WriteObject(stream, pcmBytes);
+            stream.Position = 0;
+            StreamReader sr = new StreamReader(stream);
+
+            var wrapper = new MessageWrapper
+            {
+                MessageType = typeof(byte[]).FullName,
+                Payload = sr.ReadToEnd()
+            };
+
             throw new NotImplementedException();
         }
 
