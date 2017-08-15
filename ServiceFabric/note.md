@@ -12,3 +12,7 @@ https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-se
 
 **make run time SF the same as  the nuget package**  
 https://stackoverflow.com/questions/38537134/service-fabric-missingmethodexception-clearasync  
+
+**Working with Reliable Collections with transaction-operation**  
+https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-work-with-reliable-collections  
+

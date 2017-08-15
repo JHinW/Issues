@@ -85,6 +85,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SF.Async.Interfaces\SF.Async.Interfaces.csproj">
+      <Project>{549b9ba9-d964-479f-8295-b17b5281066d}</Project>
+      <Name>SF.Async.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

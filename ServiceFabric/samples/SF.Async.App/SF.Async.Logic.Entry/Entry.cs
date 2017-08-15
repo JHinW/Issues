@@ -72,39 +72,27 @@ namespace SF.Async.Logic.Entry
         Task<object> ILuisService.GetIntention(string text)
         {
             // message wrapper
-            var wrapper = new MessageWrapper
-            {
-                MessageType = typeof(string).FullName,
-                Payload = text
-            };
+            var wrapper = MessageWrapper.CreateMessageWrapper(text);
 
             throw new NotImplementedException();
         }
 
         Task<byte[]> IAudioService.Pcm2Wav(byte[] pcmBytes)
         {
-            var stream = new MemoryStream();
-            var Serializer = new DataContractJsonSerializer(typeof(byte[]));
-            Serializer.WriteObject(stream, pcmBytes);
-            stream.Position = 0;
-            StreamReader sr = new StreamReader(stream);
-
-            var wrapper = new MessageWrapper
-            {
-                MessageType = typeof(byte[]).FullName,
-                Payload = sr.ReadToEnd()
-            };
+            var wrapper = MessageWrapper.CreateMessageWrapper(pcmBytes);
 
             throw new NotImplementedException();
         }
 
         Task<object> ISpeechService.SendAudio(byte[] wavBytes, int length)
         {
+            var wrapper = MessageWrapper.CreateMessageWrapper(wavBytes);
             throw new NotImplementedException();
         }
 
         Task<byte[]> IAudioService.Silk2Pcm(byte[] silkBytes)
         {
+            var wrapper = MessageWrapper.CreateMessageWrapper(silkBytes);
             throw new NotImplementedException();
         }
     }

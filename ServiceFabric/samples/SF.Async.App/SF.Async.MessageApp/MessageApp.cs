@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SF.Async.Interfaces;
 
 namespace SF.Async.MessageApp
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class MessageApp : StatefulService
+    internal sealed class MessageApp : StatefulService, IMessageService<MessageWrapper, TaskCompletionSource<MessageWrapper>>
     {
         public MessageApp(StatefulServiceContext context)
             : base(context)
@@ -63,6 +64,12 @@ namespace SF.Async.MessageApp
 
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }
+        }
+
+        Task<IAwaitableSource<TaskCompletionSource<MessageWrapper>>> IMessageService<MessageWrapper, TaskCompletionSource<MessageWrapper>>.GetAwaitableTask(MessageWrapper message)
+        {
+
+            throw new NotImplementedException();
         }
     }
 }

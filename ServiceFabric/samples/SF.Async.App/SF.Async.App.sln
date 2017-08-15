@@ -5,13 +5,15 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "SF.Async.App", "SF.Async.App\SF.Async.App.sfproj", "{43C80861-1C47-4128-AC79-2F82B6AA66DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.StatelessWeb", "SF.Async.StatelessWeb\SF.Async.StatelessWeb.csproj", "{2BEEF4C1-E96E-45D3-BB4C-66490EBFFD04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Async.StatelessWeb", "SF.Async.StatelessWeb\SF.Async.StatelessWeb.csproj", "{2BEEF4C1-E96E-45D3-BB4C-66490EBFFD04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Interfaces", "SF.Async.Interfaces\SF.Async.Interfaces.csproj", "{549B9BA9-D964-479F-8295-B17B5281066D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Async.Interfaces", "SF.Async.Interfaces\SF.Async.Interfaces.csproj", "{549B9BA9-D964-479F-8295-B17B5281066D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Logic.Interfaces", "SF.Async.Logic.Interfaces\SF.Async.Logic.Interfaces.csproj", "{AB88C03F-4C11-498F-B272-1FF0A30C2312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Async.Logic.Interfaces", "SF.Async.Logic.Interfaces\SF.Async.Logic.Interfaces.csproj", "{AB88C03F-4C11-498F-B272-1FF0A30C2312}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Logic.Entry", "SF.Async.Logic.Entry\SF.Async.Logic.Entry.csproj", "{E7C9E440-148C-412D-8F4B-E079D897901A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.MessageApp", "SF.Async.MessageApp\SF.Async.MessageApp.csproj", "{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,12 @@ Global
 		{E7C9E440-148C-412D-8F4B-E079D897901A}.Release|Any CPU.ActiveCfg = Release|x64
 		{E7C9E440-148C-412D-8F4B-E079D897901A}.Release|x64.ActiveCfg = Release|x64
 		{E7C9E440-148C-412D-8F4B-E079D897901A}.Release|x64.Build.0 = Release|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Debug|x64.ActiveCfg = Debug|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Debug|x64.Build.0 = Debug|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|Any CPU.ActiveCfg = Release|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|x64.ActiveCfg = Release|x64
+		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

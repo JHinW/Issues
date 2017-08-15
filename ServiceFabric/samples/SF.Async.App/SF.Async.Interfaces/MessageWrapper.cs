@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SF.Async.Interfaces
 {
     [DataContract]
-    public class MessageWrapper
+    public partial class MessageWrapper
     {
         /// <summary>
 		/// CLR Type Full Name of serialized payload.
