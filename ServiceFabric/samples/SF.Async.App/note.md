@@ -37,3 +37,7 @@ https://docs.microsoft.com/en-us/dotnet/framework/wcf/feature-details/how-to-ser
                 }
             }
 ```
+
+
+**usage between ManualResetEventSlim and SemaphoreSlim**  
+https://stackoverflow.com/questions/6764864/difference-in-usage-and-implimentation-of-manualreseteventslim-semaphoreslim/30802503#30802503  

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Logic.Entry", "SF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.MessageApp", "SF.Async.MessageApp\SF.Async.MessageApp.csproj", "{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Extensions", "SF.Async.Extensions\SF.Async.Extensions.csproj", "{39DAD286-418D-4AA1-A189-A954520B79DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,14 @@ Global
 		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|Any CPU.ActiveCfg = Release|x64
 		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|x64.ActiveCfg = Release|x64
 		{25AEEEAA-7ED6-4263-98CB-CC3CCA322DA6}.Release|x64.Build.0 = Release|x64
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{39DAD286-418D-4AA1-A189-A954520B79DB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

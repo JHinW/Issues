@@ -17,18 +17,22 @@ namespace SF.Async.Interfaces
 	    /// <returns></returns> 
 	    public static MessageWrapper CreateMessageWrapper(object message)
         {
-            var stream = new MemoryStream();
-            var Serializer = new DataContractJsonSerializer(message.GetType());
-            Serializer.WriteObject(stream, message);
-            stream.Position = 0;
-            StreamReader sr = new StreamReader(stream);
-
-            var wrapper = new MessageWrapper
+            using (var stream = new MemoryStream())
             {
-                MessageType = message.GetType().FullName,
-                Payload = sr.ReadToEnd(),
-            };
-            return wrapper;
+                var Serializer = new DataContractJsonSerializer(message.GetType());
+                Serializer.WriteObject(stream, message);
+                stream.Position = 0;
+                using (StreamReader sr = new StreamReader(stream))
+                {
+                    var wrapper = new MessageWrapper
+                    {
+                        MessageType = message.GetType().FullName,
+                        Payload = sr.ReadToEnd(),
+                    };
+                    return wrapper;
+                }
+            }
+
         }
     }
 }
