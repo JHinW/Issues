@@ -12,4 +12,12 @@ namespace SF.Async.Interfaces
     /// <param name="context"> The <see cref="MessageWrapper"/> </param>
     /// <returns></returns>
     public delegate Task MessageWrapperDelegate(MessageWrapper context);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="Tgeneric"></typeparam>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    public delegate Task<Tgeneric> MessageWrapperDelegate<Tgeneric>(MessageWrapper context) where Tgeneric: class, new();
 }
