@@ -6,7 +6,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Abstractions.TcpListener
+namespace SF.Async.Abstractions.MessageListener
 {
     internal static class BindingFactory
     {

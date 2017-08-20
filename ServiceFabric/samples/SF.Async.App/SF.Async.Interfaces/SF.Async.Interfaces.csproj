@@ -4,4 +4,8 @@
     <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ServiceFabric" Version="5.7.198" />
+  </ItemGroup>
+
 </Project>

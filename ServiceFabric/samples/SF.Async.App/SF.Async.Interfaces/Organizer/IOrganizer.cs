@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Interfaces.Organizer
 {
-    public interface IOrganizer
+    public interface IOrganizer: IAsync
     {
         /// <summary>
         /// method for adding middleware operation services to services gropus

@@ -9,9 +9,9 @@ namespace SF.Async.Interfaces
     /// <summary>
     /// a function that can process wapped messgaes
     /// </summary>
-    /// <param name="context"> The <see cref="MessageWrapper"/> </param>
+    /// <param name="context"> The <see cref="MessageContext"/> </param>
     /// <returns></returns>
-    public delegate Task MessageWrapperDelegate(MessageWrapper context);
+    public delegate Task MessageWrapperDelegate(MessageContext context);
 
     /// <summary>
     /// 
@@ -19,5 +19,5 @@ namespace SF.Async.Interfaces
     /// <typeparam name="Tgeneric"></typeparam>
     /// <param name="context"></param>
     /// <returns></returns>
-    public delegate Task<Tgeneric> MessageWrapperDelegate<Tgeneric>(MessageWrapper context) where Tgeneric: class, new();
+    public delegate Task<Tgeneric> MessageWrapperDelegate<Tgeneric>(MessageContext context) where Tgeneric: class, new();
 }

@@ -1,5 +1,6 @@
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Communication.Wcf.Runtime;
+using SF.Async.Interfaces;
 using System;
 using System.Fabric;
 using System.ServiceModel;
@@ -7,12 +8,12 @@ using System.ServiceModel.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SF.Async.Abstractions.TcpListener
+namespace SF.Async.Abstractions.MessageListener
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MessageListner<TInterfaces> : WcfCommunicationListener<TInterfaces> where TInterfaces: class
+    public class MessageListner<TInterfaces> : WcfCommunicationListener<TInterfaces> where TInterfaces: class, IAsync
     {
         /// <summary>
         ///  The name of the endpoint configured in the ServiceManifest under the Endpoints section

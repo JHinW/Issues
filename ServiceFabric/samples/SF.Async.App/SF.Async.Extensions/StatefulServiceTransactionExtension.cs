@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Extensions
 {
-    public static class StatefulServiceExtension
+    public static class StatefulServiceTransactionExtension
     {
         private const int DefaultMaxAttempts = 10;
         private static readonly TimeSpan InitialDelay = TimeSpan.FromMilliseconds(200);
