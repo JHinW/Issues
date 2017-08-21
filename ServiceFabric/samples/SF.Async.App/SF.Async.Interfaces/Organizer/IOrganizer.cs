@@ -8,20 +8,9 @@ namespace SF.Async.Interfaces.Organizer
 {
     public interface IOrganizer: IAsync
     {
-        /// <summary>
-        /// method for adding middleware operation services to services gropus
-        /// </summary>
-        /// <param name="middleware">service middleware</param>
-        /// <returns></returns>
-        IOrganizer Use(Func<MessageWrapperDelegate, MessageWrapperDelegate> middleware);
+        IEntryComponents EntryComponents { get; set; }
 
-        /// <summary>
-        /// method for adding middleware connecttitng services to services gropus
-        /// </summary>
-        /// <param name="middleware"></param>
-        /// <returns></returns>
-        IOrganizer Connect(Func<MessageWrapperDelegate, MessageWrapperDelegate> middleware);
-
+        ILinker Linker { get; set; }
 
         /// <summary>
         /// send message to other sf-services with this entry method
@@ -36,19 +25,5 @@ namespace SF.Async.Interfaces.Organizer
         /// <param name="message"></param>
         /// <returns></returns>
         IOrganizer SetConnecting(MessageWrapper message);
-
-
-        /// <summary>
-        /// builds the delegate used by method  <see cref="SetMessage"/> 
-        /// </summary>
-        /// <returns></returns>
-        MessageWrapperDelegate BuildComponents();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        MessageWrapperDelegate BuildConnecttings();
-
     }
 }

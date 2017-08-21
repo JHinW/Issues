@@ -19,11 +19,16 @@ namespace SF.Async.Interfaces
         [DataMember]
         public abstract ServiceReferenceWrapper ServiceReferenceWrapper { get; }
 
-
         /// <summary>
-        /// message entity(serialized already)
+        /// inputmessage entity(serialized already)
         /// </summary>
         [DataMember]
-        public abstract MessageWrapper MessageWrapper { get; }
+        public abstract MessageWrapper InputMessage { get; }
+
+        /// <summary>
+        /// outputmessage entity(serialized already)
+        /// </summary>
+        public abstract MessageWrapper OutputMessage { get; }
+
     }
 }

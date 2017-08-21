@@ -10,19 +10,21 @@ namespace SF.Async.Abstractions
 {
     public abstract class OrganizerBase : IOrganizer
     {
-        private readonly IList<Func<MessageWrapperDelegate, MessageWrapperDelegate>> _components = new List<Func<MessageWrapperDelegate, MessageWrapperDelegate>>();
+        public virtual IEntryComponents EntryComponents { get; set; }
+        public virtual ILinker Linker { get; set; }
 
-        private readonly IList<Func<MessageWrapperDelegate, MessageWrapperDelegate>> _connectings = new List<Func<MessageWrapperDelegate, MessageWrapperDelegate>>();
 
-        public virtual IOrganizer Use(Func<MessageWrapperDelegate, MessageWrapperDelegate> middleware)
+        public IOrganizer Setting(Func<MessageWrapperDelegate, MessageWrapperDelegate>  use)
         {
-            _components.Add(middleware);
-            return this;
-        }
+            EntryComponents.Use(next =>
+            {
+                return messageContext =>
+                {
 
-        public virtual IOrganizer Connect(Func<MessageWrapperDelegate, MessageWrapperDelegate> middleware)
-        {
-            _connectings.Add(middleware);
+                    return next(messageContext);
+                };
+            }
+            );
             return this;
         }
 
@@ -35,37 +37,6 @@ namespace SF.Async.Abstractions
         public virtual IOrganizer SetConnecting(MessageWrapper message)
         {
             return this;
-        }
-
-        public MessageWrapperDelegate BuildComponents()
-        {
-            MessageWrapperDelegate app = message =>
-            {
-                return Task.FromResult(message);
-            };
-
-            foreach (var component in _components.Reverse())
-            {
-                app = component(app);
-            }
-
-            return app;
-
-        }
-
-        public MessageWrapperDelegate BuildConnecttings()
-        {
-            MessageWrapperDelegate app = message =>
-            {
-                return Task.FromResult(message);
-            };
-
-            foreach (var connecting in _connectings.Reverse())
-            {
-                app = connecting(app);
-            }
-
-            return app;
         }
     }
 }
