@@ -14,4 +14,6 @@ https://stackoverflow.com/questions/7106454/are-c-sharp-events-synchronous
 https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/threading/how-to-use-a-thread-pool  
 
 
+**Tasks, Monads, and LINQ**
+https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 
