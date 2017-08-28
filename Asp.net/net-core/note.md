@@ -6,3 +6,5 @@ https://github.com/wangjinisda/Cognitive-Speech-STT-ServiceLibrary/tree/aspnet_c
 web built with owin seems better in concurrency but worse in GC which is opposite to .net core
 
 
+**enable https in asp.net core in programming way**  
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?tabs=aspnetcore2x  
