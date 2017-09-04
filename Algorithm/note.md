@@ -14,6 +14,10 @@ https://my.oschina.net/u/140462/blog/282319
 **Quick Sort**  
 http://bubkoo.com/2014/01/12/sort-algorithm/quick-sort/
 
+1.  choose last node as pivot
+
+2. choose 
+
 
 
 **for interview**
