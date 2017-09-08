@@ -8,14 +8,14 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace SF.Async.StateFul
+namespace SF.Async.StateFulQueue
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class StateFul : StatefulService
+    internal sealed class StateFulQueue : StatefulService
     {
-        public StateFul(StatefulServiceContext context)
+        public StateFulQueue(StatefulServiceContext context)
             : base(context)
         { }
 
@@ -41,20 +41,25 @@ namespace SF.Async.StateFul
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
-            var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-            
+            var queue = await StateManager.GetOrAddAsync<IReliableQueue<string>>("queue");
+            var eventDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("eventDictionary");
+
+
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 using (var tx = this.StateManager.CreateTransaction())
                 {
-                    var result = await myDictionary.TryGetValueAsync(tx, "Counter");
+                    var result = await queue.TryDequeueAsync(tx);
+
+                    if (result.HasValue)
+                    {
+                        // Do the work
+                    }
 
                     ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
                         result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-                    await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
 
                     // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
                     // discarded, and nothing is saved to the secondary replicas.

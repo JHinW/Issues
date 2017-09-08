@@ -32,6 +32,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SF.Async.StateFulQueue\SF.Async.StateFulQueue.csproj" />
     <ProjectReference Include="..\SF.Async.StateFul\SF.Async.StateFul.csproj" />
     <ProjectReference Include="..\WebApp\WebApp.csproj" />
   </ItemGroup>

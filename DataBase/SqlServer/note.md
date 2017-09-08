@@ -23,3 +23,7 @@ https://docs.microsoft.com/en-us/sql/relational-databases/stored-procedures/crea
 **SET NOCOUNT**  
 https://docs.microsoft.com/en-us/sql/t-sql/statements/set-nocount-transact-sql  
 
+
+**isolation level**   
+https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/transaction-isolation-levels  
+
