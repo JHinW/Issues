@@ -1,0 +1,32 @@
+﻿using SF.Async.Operation.Common;
+using SF.Async.Operation.Common.Abstractions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SF.Async.StateFul.Services
+{
+    public class OccupantImpl: OccupantBase<string, string>, Microsoft.ServiceFabric.Services.Remoting.IService
+    {
+        public OccupantImpl(IQueue<MessageWrapper> service) : base(service) { }
+
+        public override MessageWrapper Req2Wrapper(string input)
+        {
+            var wrapper = new MessageWrapper
+            {
+                AsyncSignalRefKey = Guid.NewGuid().ToString(),
+                MessageBody = input
+            };
+
+            return wrapper;
+        }
+
+        public override string Wrapper2Res(MessageWrapper input)
+        {
+            return input.MessageRes;
+        }
+
+    }
+}

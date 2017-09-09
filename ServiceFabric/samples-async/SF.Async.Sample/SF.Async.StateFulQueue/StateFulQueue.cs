@@ -7,18 +7,21 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SF.Async.Operation.Common;
+using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
+using SF.Async.StateFul.Services;
 
 namespace SF.Async.StateFulQueue
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class StateFulQueue : StatefulService, IQueue<string>
+    internal sealed class StateFulQueue : StatefulService, IQueue<MessageWrapper>
     {
 
-        private IReliableQueue<string> reliableQueue;
+        private IReliableQueue<MessageWrapper> reliableQueue;
 
-        private IReliableDictionary<string, string> reliableDictionary;
+        private IReliableDictionary<string, TaskCompletionSource<MessageWrapper>> reliableDictionary;
 
         public StateFulQueue(StatefulServiceContext context)
             : base(context)
@@ -33,7 +36,10 @@ namespace SF.Async.StateFulQueue
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new ServiceReplicaListener[0];
+            yield return new ServiceReplicaListener(context => {
+
+                return new FabricTransportServiceRemotingListener(context, new OccupantImpl(this));
+            }, "StateFulQueueFabricTransportServiceRemotingListener");
         }
 
         /// <summary>
@@ -46,45 +52,79 @@ namespace SF.Async.StateFulQueue
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
-            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<string>>("queue");
-            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("eventDictionary");
+            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<MessageWrapper>>("queue");
+            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<MessageWrapper>>>("eventDictionary");
 
 
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
+                MessageWrapper context = null;
+
                 using (var tx = this.StateManager.CreateTransaction())
                 {
-                    var result = await queue.TryDequeueAsync(tx);
+                    var result = await reliableQueue.TryDequeueAsync(tx);
+                    context = result.HasValue ? result.Value : null; 
+                    
+                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
+                    // discarded, and nothing is saved to the secondary replicas.
+                    await tx.CommitAsync();
 
-                    if (result.HasValue)
+                    if(context != null)
                     {
-                        // Do the work
+                        var signalPack = await reliableDictionary.TryGetValueAsync(tx, context.AsyncSignalRefKey);
+                        context.Signal = signalPack.Value;
                     }
 
                     ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
                         result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                    // discarded, and nothing is saved to the secondary replicas.
-                    await tx.CommitAsync();
+                    
                 }
+
+                if (context != null)
+                {
+
+
+                    try
+                    {
+                        
+
+                    }
+                    catch (Exception e)
+                    {
+                        context.HasException = true;
+                        context.MessageRes = e.ToString();
+                        context.Signal.SetResult(context);
+                    }
+                }
+
+
 
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }
         }
 
-        public async Task<TaskCompletionSource<string>> EnqueueAsync(string message)
+        public async Task<TaskCompletionSource<MessageWrapper>> EnqueueAsync(MessageWrapper messageWrapper)
         {
-            var completionSource = new TaskCompletionSource<string>();
-            using (var tx = this.StateManager.CreateTransaction()){
-                await this.reliableDictionary.AddAsync(tx, "????",  );
-                await this.reliableQueue.EnqueueAsync(tx, message);
+            using (var tx = this.StateManager.CreateTransaction())
+            {
+                var signal = new TaskCompletionSource<MessageWrapper>();
+                await this.reliableDictionary.AddAsync(tx, messageWrapper.AsyncSignalRefKey, signal);
+                await this.reliableQueue.EnqueueAsync(tx, messageWrapper);
+                await tx.CommitAsync();
+                return signal;
             }
-            
-            
-            return 
+        }
+
+        public Task<TaskCompletionSource<MessageWrapper>> DequeueAsync()
+        {
+            return null;
+        }
+
+        public Task<TaskCompletionSource<MessageWrapper>> PeekAsync()
+        {
+            return null;
         }
     }
 }

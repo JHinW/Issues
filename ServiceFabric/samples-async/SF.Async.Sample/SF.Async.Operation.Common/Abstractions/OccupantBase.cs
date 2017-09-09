@@ -6,14 +6,32 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common.Abstractions
 {
-    public abstract class OccupantBase<T> : IOccupant<T>
+    public abstract class OccupantBase<TReq, TRes> : IOccupant<TReq, TRes>
     {
-        private IQueue<T> queueService;
+        private IQueue<MessageWrapper> _queueService;
 
-        public async Task<T> GetAsyncResultAsync(T message)
+        protected OccupantBase(IQueue<MessageWrapper> queueService)
         {
-            var result = await queueService.EnqueueAsync(message);
-            return await result.Task;
+            _queueService = queueService;
+        }
+
+        public Task<TRes> GetAsyncResultAsync(TReq message)
+        {
+           return Task.Run(async () => {
+                var result = await _queueService.EnqueueAsync(Req2Wrapper(message));
+                var wrapper = await result.Task;
+                return Wrapper2Res(wrapper);
+            });
+        }
+
+        public virtual MessageWrapper Req2Wrapper(TReq input)
+        {
+            return default(MessageWrapper);
+        }
+
+        public virtual TRes Wrapper2Res(MessageWrapper input)
+        {
+            return default(TRes);
         }
     }
 }
