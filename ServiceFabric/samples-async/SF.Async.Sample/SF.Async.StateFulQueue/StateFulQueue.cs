@@ -13,8 +13,13 @@ namespace SF.Async.StateFulQueue
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class StateFulQueue : StatefulService
+    internal sealed class StateFulQueue : StatefulService, IQueue<string>
     {
+
+        private IReliableQueue<string> reliableQueue;
+
+        private IReliableDictionary<string, string> reliableDictionary;
+
         public StateFulQueue(StatefulServiceContext context)
             : base(context)
         { }
@@ -41,8 +46,8 @@ namespace SF.Async.StateFulQueue
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
-            var queue = await StateManager.GetOrAddAsync<IReliableQueue<string>>("queue");
-            var eventDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("eventDictionary");
+            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<string>>("queue");
+            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("eventDictionary");
 
 
             while (true)
@@ -68,6 +73,18 @@ namespace SF.Async.StateFulQueue
 
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
             }
+        }
+
+        public async Task<TaskCompletionSource<string>> EnqueueAsync(string message)
+        {
+            var completionSource = new TaskCompletionSource<string>();
+            using (var tx = this.StateManager.CreateTransaction()){
+                await this.reliableDictionary.AddAsync(tx, "????",  );
+                await this.reliableQueue.EnqueueAsync(tx, message);
+            }
+            
+            
+            return 
         }
     }
 }
