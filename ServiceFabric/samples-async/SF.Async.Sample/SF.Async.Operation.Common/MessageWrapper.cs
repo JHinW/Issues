@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace SF.Async.Operation.Common
 {
     [DataContract]
-    public class MessageWrapper
+    public class MessageWrapper: IMessageWrapper
     {
         public string AsyncSignalRefKey { get; set; }
 
         [IgnoreDataMember]
-        public TaskCompletionSource<MessageWrapper> Signal { get; set; }
+        public TaskCompletionSource<IMessageWrapper> Signal { get; set; }
 
         public Boolean HasException { get; set; } = false;
 

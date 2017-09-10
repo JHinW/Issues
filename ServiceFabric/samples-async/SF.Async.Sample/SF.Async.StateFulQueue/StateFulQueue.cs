@@ -16,12 +16,12 @@ namespace SF.Async.StateFulQueue
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class StateFulQueue : StatefulService, IQueue<MessageWrapper>
+    internal sealed class StateFulQueue : StatefulService, IQueue<IMessageWrapper>
     {
 
-        private IReliableQueue<MessageWrapper> reliableQueue;
+        private IReliableQueue<IMessageWrapper> reliableQueue;
 
-        private IReliableDictionary<string, TaskCompletionSource<MessageWrapper>> reliableDictionary;
+        private IReliableDictionary<string, TaskCompletionSource<IMessageWrapper>> reliableDictionary;
 
         public StateFulQueue(StatefulServiceContext context)
             : base(context)
@@ -52,15 +52,15 @@ namespace SF.Async.StateFulQueue
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
-            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<MessageWrapper>>("queue");
-            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<MessageWrapper>>>("eventDictionary");
+            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<IMessageWrapper>>("queue");
+            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<IMessageWrapper>>>("eventDictionary");
 
 
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                MessageWrapper context = null;
+                IMessageWrapper context = null;
 
                 using (var tx = this.StateManager.CreateTransaction())
                 {
@@ -105,11 +105,11 @@ namespace SF.Async.StateFulQueue
             }
         }
 
-        public async Task<TaskCompletionSource<MessageWrapper>> EnqueueAsync(MessageWrapper messageWrapper)
+        public async Task<TaskCompletionSource<IMessageWrapper>> EnqueueAsync(IMessageWrapper messageWrapper)
         {
             using (var tx = this.StateManager.CreateTransaction())
             {
-                var signal = new TaskCompletionSource<MessageWrapper>();
+                var signal = new TaskCompletionSource<IMessageWrapper>();
                 await this.reliableDictionary.AddAsync(tx, messageWrapper.AsyncSignalRefKey, signal);
                 await this.reliableQueue.EnqueueAsync(tx, messageWrapper);
                 await tx.CommitAsync();
@@ -117,12 +117,12 @@ namespace SF.Async.StateFulQueue
             }
         }
 
-        public Task<TaskCompletionSource<MessageWrapper>> DequeueAsync()
+        public Task<TaskCompletionSource<IMessageWrapper>> DequeueAsync()
         {
             return null;
         }
 
-        public Task<TaskCompletionSource<MessageWrapper>> PeekAsync()
+        public Task<TaskCompletionSource<IMessageWrapper>> PeekAsync()
         {
             return null;
         }

@@ -10,9 +10,9 @@ namespace SF.Async.StateFul.Services
 {
     public class OccupantImpl: OccupantBase<string, string>, Microsoft.ServiceFabric.Services.Remoting.IService
     {
-        public OccupantImpl(IQueue<MessageWrapper> service) : base(service) { }
+        public OccupantImpl(IQueue<IMessageWrapper> service) : base(service) { }
 
-        public override MessageWrapper Req2Wrapper(string input)
+        public override IMessageWrapper Req2Wrapper(string input)
         {
             var wrapper = new MessageWrapper
             {
@@ -23,7 +23,7 @@ namespace SF.Async.StateFul.Services
             return wrapper;
         }
 
-        public override string Wrapper2Res(MessageWrapper input)
+        public override string Wrapper2Res(IMessageWrapper input)
         {
             return input.MessageRes;
         }

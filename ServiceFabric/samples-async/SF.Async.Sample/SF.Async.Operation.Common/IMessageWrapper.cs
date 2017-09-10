@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SF.Async.Operation.Common
+{
+    public interface IMessageWrapper
+    {
+        string AsyncSignalRefKey { get; set; }
+
+        TaskCompletionSource<IMessageWrapper> Signal { get; set; }
+
+        Boolean HasException { get; set; }
+
+        string MessageBody { get; set; }
+
+        string MessageRes { get; set; }
+    }
+}
