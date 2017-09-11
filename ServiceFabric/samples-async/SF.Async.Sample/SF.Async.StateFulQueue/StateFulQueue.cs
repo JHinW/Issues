@@ -10,6 +10,7 @@ using Microsoft.ServiceFabric.Services.Runtime;
 using SF.Async.Operation.Common;
 using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
 using SF.Async.StateFul.Services;
+using SF.Async.Operation.Common.Abstractions;
 
 namespace SF.Async.StateFulQueue
 {
@@ -56,6 +57,12 @@ namespace SF.Async.StateFulQueue
             reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<IMessageWrapper>>>("eventDictionary");
 
 
+            var entry = new EntryBuilder()
+                .UseComp(next => context => {
+
+                    return Task.CompletedTask;
+                }).Build();
+
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -84,12 +91,9 @@ namespace SF.Async.StateFulQueue
 
                 if (context != null)
                 {
-
-
                     try
                     {
-                        
-
+                        await entry.SendAsync(context);
                     }
                     catch (Exception e)
                     {

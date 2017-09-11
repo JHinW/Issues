@@ -12,7 +12,9 @@ namespace SF.Async.Operation.Common
 
         ILogicEntryBuilder SpecifyAfter(AfterMessageDelegate afterMessageDelegate);
 
-        ILogicEntryBuilder SpecifyContext(MessageProduceDelegate messageProduceDelegate);
+        ILogicEntryBuilder SpecifyDelegate(MessageDelegate messageDelegate);
+
+        // ILogicEntryBuilder SpecifyContext(MessageProduceDelegate messageProduceDelegate);
 
         ILogicEntry Build();
     }

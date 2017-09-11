@@ -8,6 +8,8 @@ namespace SF.Async.Operation.Common
 {
     public interface ILogicEntry
     {
-        MessageDelegate MessageDelegate { get; set; }
+        //MessageDelegate MessageDelegate { get; set; }
+
+        Task SendAsync(IMessageWrapper MessageWrapper);
     }
 }
