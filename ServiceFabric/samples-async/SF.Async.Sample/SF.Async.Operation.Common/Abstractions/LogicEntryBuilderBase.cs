@@ -20,15 +20,15 @@ namespace SF.Async.Operation.Common.Abstractions
 
         public virtual ILogicEntry Build()
         {
-            var entry = new LogicEntryBase();
-            entry.MessageDelegate = async (context) => {
+            var entry = new LogicEntryBase(async (context) => {
                 try
                 {
                     await _metex.WaitAsync();
                     _beforeMessageDelegate(context);
                     await _messageDelegate(context);
-                    
-                }catch(Exception e)
+
+                }
+                catch (Exception e)
                 {
                 }
                 finally
@@ -36,9 +36,9 @@ namespace SF.Async.Operation.Common.Abstractions
                     _afterMessageDelegate(context);
                     _metex.Release();
                 }
-                
 
-            };
+
+            });
             return entry;
         }
 

@@ -11,6 +11,12 @@ namespace SF.Async.Operation.Common.Abstractions
     {
         public MessageDelegate _messageDelegate;
 
+
+        public LogicEntryBase(MessageDelegate messageDelegate)
+        {
+            _messageDelegate = messageDelegate;
+        }
+
         public Task SendAsync(IMessageWrapper MessageWrapper)
         {
             return Task.Factory.StartNew(async () =>
