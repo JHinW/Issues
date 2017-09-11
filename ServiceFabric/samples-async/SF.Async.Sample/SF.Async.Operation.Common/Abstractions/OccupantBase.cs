@@ -15,7 +15,7 @@ namespace SF.Async.Operation.Common.Abstractions
             _queueService = queueService;
         }
 
-        public Task<TRes> GetAsyncResultAsync(TReq message)
+        public Task<TRes> GetResultAsync(TReq message)
         {
            return Task.Run(async () => {
                 var result = await _queueService.EnqueueAsync(Req2Wrapper(message));

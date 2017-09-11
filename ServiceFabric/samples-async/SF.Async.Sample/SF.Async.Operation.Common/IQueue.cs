@@ -10,8 +10,8 @@ namespace SF.Async.Operation.Common
     {
         Task<TaskCompletionSource<T>> EnqueueAsync(T message);
 
-        Task<TaskCompletionSource<T>> DequeueAsync();
+        Task<T> DequeueAsync();
 
-        Task<TaskCompletionSource<T>> PeekAsync();
+        Task<T> PeekAsync();
     }
 }

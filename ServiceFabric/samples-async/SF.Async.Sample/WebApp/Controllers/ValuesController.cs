@@ -18,9 +18,19 @@ namespace WebApp.Controllers
             var serviceName = $"{applicationName}/SF.Async.StateFulQueue";
 
             var service = this.GetStateFulService(new Uri(serviceName));
-            var result =  await service.GetAsyncResultAsync("ssss");
+            try
+            {
+                var result = await service.GetSampleAsyncResult("ssss");
 
-            return new string[] { "value1", result };
+                return new string[] { "value1", result };
+
+            }   catch(Exception e)
+            {
+                throw e;
+            }
+            
+
+            
         }
 
         // GET api/values/5

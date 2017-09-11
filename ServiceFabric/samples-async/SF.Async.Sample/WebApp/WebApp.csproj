@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SF.Async.Operation.Common\SF.Async.Operation.Common.csproj" />
+    <ProjectReference Include="..\SF.Async.Operation.Usage\SF.Async.Operation.Usage.csproj" />
     <ProjectReference Include="..\SF.Async.StateFulQueue\SF.Async.StateFulQueue.csproj" />
   </ItemGroup>
 

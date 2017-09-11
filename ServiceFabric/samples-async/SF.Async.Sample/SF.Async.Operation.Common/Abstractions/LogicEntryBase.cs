@@ -17,15 +17,16 @@ namespace SF.Async.Operation.Common.Abstractions
             _messageDelegate = messageDelegate;
         }
 
-        public Task SendAsync(IMessageWrapper MessageWrapper)
+        public Task SendAsync(IMessageWrapper messageWrapper)
         {
             return Task.Factory.StartNew(async () =>
             {
                 if(_messageDelegate != null)
                 {
-                    await _messageDelegate(MessageWrapper);
+                    await _messageDelegate(messageWrapper);
                 }    
             }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
+
     }
 }

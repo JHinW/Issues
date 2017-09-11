@@ -10,7 +10,7 @@ namespace SF.Async.Operation.Common
     {
         string AsyncSignalRefKey { get; set; }
 
-        TaskCompletionSource<IMessageWrapper> Signal { get; set; }
+        ISignalSource SignalSource { get; set; }
 
         Boolean HasException { get; set; }
 

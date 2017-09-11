@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.StateFul", "SF.Asy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.StateFulQueue", "SF.Async.StateFulQueue\SF.Async.StateFulQueue.csproj", "{D026A7B0-4970-4C39-883B-A2E76BDACA92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Operation.Common", "SF.Async.Operation.Common\SF.Async.Operation.Common.csproj", "{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Async.Operation.Common", "SF.Async.Operation.Common\SF.Async.Operation.Common.csproj", "{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Async.Operation.Usage", "SF.Async.Operation.Usage\SF.Async.Operation.Usage.csproj", "{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,14 @@ Global
 		{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}.Release|x64.ActiveCfg = Release|Any CPU
 		{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}.Release|x64.Build.0 = Release|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Debug|x64.Build.0 = Debug|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

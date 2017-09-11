@@ -1,0 +1,33 @@
+﻿using SF.Async.Operation.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SF.Async.Operation.Usage
+{
+    public class SignalSource : ISignalSource
+    {
+        private TaskCompletionSource<IMessageWrapper> _isource = null;
+
+        private TaskCompletionSource<MessageWrapper> _source = null;
+
+        public SignalSource(TaskCompletionSource<IMessageWrapper> isource)
+        {
+            _isource = isource;
+        }
+
+
+        public SignalSource(TaskCompletionSource<MessageWrapper> source)
+        {
+            _source = source;
+        }
+
+        public void SetResult(IMessageWrapper messageWrapper)
+        {
+           // _source?.SetResult(messageWrapper);
+            //_source?.SetResult(messageWrapper);
+        }
+    }
+}

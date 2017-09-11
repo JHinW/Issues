@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common
 {
-    public interface IOccupant<TReq, TRes>
+    public interface ISignalSource
     {
-        Task<TRes> GetResultAsync(TReq message);
+        void SetResult(IMessageWrapper messageWrapper);
     }
 }
