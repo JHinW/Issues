@@ -59,9 +59,11 @@ namespace SF.Async.StateFulQueue
 
             var entry = new EntryBuilder()
                 .UseComp(next => context => {
-
+                    context.MessageRes = "weee";
+                    context.Signal.SetResult(context);
                     return Task.CompletedTask;
-                }).Build();
+                })
+                .Build();
 
             while (true)
             {

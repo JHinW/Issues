@@ -11,9 +11,16 @@ namespace WebApp.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+
+            var applicationName = "fabric:/SF.Async.Sample";
+            var serviceName = $"{applicationName}/SF.Async.StateFulQueue";
+
+            var service = this.GetStateFulService(new Uri(serviceName));
+            var result =  await service.GetAsyncResultAsync("ssss");
+
+            return new string[] { "value1", result };
         }
 
         // GET api/values/5

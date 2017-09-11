@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.StateFul.Services
 {
-    public class OccupantImpl: OccupantBase<string, string>, Microsoft.ServiceFabric.Services.Remoting.IService
+    public class OccupantImpl: OccupantBase<string, string>
     {
         public OccupantImpl(IQueue<IMessageWrapper> service) : base(service) { }
 

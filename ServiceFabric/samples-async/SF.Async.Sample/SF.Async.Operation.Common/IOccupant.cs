@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common
 {
-    public interface IOccupant<TReq, TRes>
+    public interface IOccupant<TReq, TRes>: Microsoft.ServiceFabric.Services.Remoting.IService
     {
         Task<TRes> GetAsyncResultAsync(TReq message);
     }
