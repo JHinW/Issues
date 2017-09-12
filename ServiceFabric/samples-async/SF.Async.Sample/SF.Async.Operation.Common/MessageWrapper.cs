@@ -1,12 +1,7 @@
-﻿using SF.Async.Operation.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Usage
+namespace SF.Async.Operation.Common
 {
     [DataContract(Name= "MessageWrapper")]
     [KnownType(typeof(MessageWrapper))]

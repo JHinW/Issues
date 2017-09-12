@@ -8,9 +8,9 @@ namespace SF.Async.Operation.Common.Abstractions
 {
     public abstract class OccupantBase<TReq, TRes> : IOccupant<TReq, TRes>
     {
-        private IQueue<IMessageWrapper> _queueService;
+        private IQueue<MessageWrapper> _queueService;
 
-        protected OccupantBase(IQueue<IMessageWrapper> queueService)
+        protected OccupantBase(IQueue<MessageWrapper> queueService)
         {
             _queueService = queueService;
         }
@@ -24,12 +24,12 @@ namespace SF.Async.Operation.Common.Abstractions
             });
         }
 
-        public virtual IMessageWrapper Req2Wrapper(TReq input)
+        public virtual MessageWrapper Req2Wrapper(TReq input)
         {
-            return default(IMessageWrapper);
+            return default(MessageWrapper);
         }
 
-        public virtual TRes Wrapper2Res(IMessageWrapper input)
+        public virtual TRes Wrapper2Res(MessageWrapper input)
         {
             return default(TRes);
         }

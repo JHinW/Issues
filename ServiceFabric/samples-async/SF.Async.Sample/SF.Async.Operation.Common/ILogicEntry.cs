@@ -10,6 +10,6 @@ namespace SF.Async.Operation.Common
     {
         //MessageDelegate MessageDelegate { get; set; }
 
-        Task SendAsync(IMessageWrapper MessageWrapper);
+        Task SendAsync(MessageWrapper MessageWrapper);
     }
 }

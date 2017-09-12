@@ -70,7 +70,7 @@ namespace SF.Async.StateFulQueue
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                IMessageWrapper context = null;
+                MessageWrapper context = null;
 
                 using (var tx = this.StateManager.CreateTransaction())
                 {

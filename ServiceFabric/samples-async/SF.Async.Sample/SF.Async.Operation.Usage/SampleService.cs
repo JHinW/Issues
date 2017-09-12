@@ -17,7 +17,7 @@ namespace SF.Async.Operation.Usage
             return base.GetResultAsync(message);
         }
 
-        public override IMessageWrapper Req2Wrapper(string input)
+        public override MessageWrapper Req2Wrapper(string input)
         {
             var wrapper = new MessageWrapper
             {
@@ -28,7 +28,7 @@ namespace SF.Async.Operation.Usage
             return wrapper;
         }
 
-        public override string Wrapper2Res(IMessageWrapper input)
+        public override string Wrapper2Res(MessageWrapper input)
         {
             return input.MessageRes;
         }

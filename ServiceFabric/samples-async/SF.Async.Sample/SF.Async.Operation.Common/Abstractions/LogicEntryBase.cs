@@ -17,7 +17,7 @@ namespace SF.Async.Operation.Common.Abstractions
             _messageDelegate = messageDelegate;
         }
 
-        public Task SendAsync(IMessageWrapper messageWrapper)
+        public Task SendAsync(MessageWrapper messageWrapper)
         {
             return Task.Factory.StartNew(async () =>
             {
