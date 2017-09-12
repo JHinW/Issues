@@ -8,6 +8,6 @@ namespace SF.Async.Operation.Common
 {
     public interface ISignalSource
     {
-        void SetResult(MessageWrapper messageWrapper);
+        void SetResult(IMessageContext messageWrapper);
     }
 }

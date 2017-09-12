@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common
 {
-    public delegate Task MessageDelegate(MessageWrapper context);
+    public delegate Task MessageDelegate(IMessageContext context);
 
-    public delegate void BeforeMessageDelegate(MessageWrapper context);
+    public delegate void BeforeMessageDelegate(IMessageContext context);
 
-    public delegate void AfterMessageDelegate(MessageWrapper context);
+    public delegate void AfterMessageDelegate(IMessageContext context);
 
-    public delegate MessageWrapper MessageProduceDelegate();
+    public delegate IMessageContext MessageProduceDelegate();
 }

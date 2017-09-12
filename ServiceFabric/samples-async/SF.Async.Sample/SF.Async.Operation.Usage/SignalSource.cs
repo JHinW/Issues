@@ -9,14 +9,14 @@ namespace SF.Async.Operation.Usage
 {
     public class SignalSource : ISignalSource
     {
-        private TaskCompletionSource<MessageWrapper> _source = null;
+        private TaskCompletionSource<IMessageContext> _source = null;
 
-        public SignalSource(TaskCompletionSource<MessageWrapper> source)
+        public SignalSource(TaskCompletionSource<IMessageContext> source)
         {
             _source = source;
         }
 
-        public void SetResult(MessageWrapper messageWrapper)
+        public void SetResult(IMessageContext messageWrapper)
         {
             _source?.SetResult(messageWrapper);
         }

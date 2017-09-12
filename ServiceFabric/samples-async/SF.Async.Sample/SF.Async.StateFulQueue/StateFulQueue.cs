@@ -18,16 +18,28 @@ namespace SF.Async.StateFulQueue
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class StateFulQueue : StatefulService, IQueue<MessageWrapper>
+    internal sealed class StateFulQueue : StatefulService, IQueue<IMessageContext>
     {
 
-        private IReliableQueue<MessageWrapper> reliableQueue;
+        private IReliableQueue<MessageWrapper> _reliableQueue;
 
-        private IReliableDictionary<string, TaskCompletionSource<MessageWrapper>> reliableDictionary;
+        private IReliableDictionary<string, TaskCompletionSource<IMessageContext>> _reliableDictionary;
+
+        private ILogicEntry _logicEntry;
 
         public StateFulQueue(StatefulServiceContext context)
             : base(context)
-        { }
+        {
+            _logicEntry = new EntryBuilder()
+                 .UseComp(next => messageContext =>
+                 {
+                     messageContext.MessageRes = "weee";
+                     messageContext.SignalSource.SetResult(messageContext);
+                     return Task.CompletedTask;
+                 })
+                 .Build();
+
+        }
 
         /// <summary>
         /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.
@@ -38,7 +50,8 @@ namespace SF.Async.StateFulQueue
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            yield return new ServiceReplicaListener(context => {
+            yield return new ServiceReplicaListener(context =>
+            {
 
                 return new FabricTransportServiceRemotingListener(context, new OccupantImpl(this));
             }, "StateFulQueueFabricTransportServiceRemotingListener");
@@ -54,36 +67,27 @@ namespace SF.Async.StateFulQueue
             // TODO: Replace the following sample code with your own logic 
             //       or remove this RunAsync override if it's not needed in your service.
 
-            reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<MessageWrapper>>("queue");
-            reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<MessageWrapper>>>("eventDictionary");
-
-
-            var entry = new EntryBuilder()
-                .UseComp(next => context => {
-                    context.MessageRes = "weee";
-                    context.SignalSource.SetResult(context);
-                    return Task.CompletedTask;
-                })
-                .Build();
+            _reliableQueue = await this.StateManager.GetOrAddAsync<IReliableQueue<MessageWrapper>>("queue");
+            _reliableDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, TaskCompletionSource<IMessageContext>>>("eventDictionary");
 
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                MessageWrapper context = null;
+                MessageWrapper messageWrapper = null;
 
                 using (var tx = this.StateManager.CreateTransaction())
                 {
-                    var result = await reliableQueue.TryDequeueAsync(tx);
-                    context = result.HasValue ? result.Value : null; 
-                    
+                    var result = await _reliableQueue.TryDequeueAsync(tx);
+                    messageWrapper = result.HasValue ? result.Value : null;
+
                     // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
                     // discarded, and nothing is saved to the secondary replicas.
-                    
 
-                    if(context != null)
+                    if (messageWrapper != null)
                     {
-                        var signalPack = await reliableDictionary.TryGetValueAsync(tx, context.AsyncSignalRefKey);
+                        var context = messageWrapper.MessageContext;
+                        var signalPack = await _reliableDictionary.TryGetValueAsync(tx, context.AsyncSignalRefKey);
                         context.SignalSource = new SignalSource(signalPack.Value);
                     }
 
@@ -91,14 +95,15 @@ namespace SF.Async.StateFulQueue
 
                     ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
                         result.HasValue ? result.Value.ToString() : "Value does not exist.");
-                    
+
                 }
 
-                if (context != null)
+                if (messageWrapper != null)
                 {
+                    var context = messageWrapper.MessageContext;
                     try
                     {
-                        await entry.SendAsync(context);
+                        await _logicEntry.SendAsync(context);
                     }
                     catch (Exception e)
                     {
@@ -114,37 +119,42 @@ namespace SF.Async.StateFulQueue
             }
         }
 
-        public async Task<TaskCompletionSource<MessageWrapper>> EnqueueAsync(MessageWrapper messageWrapper)
-        {                                                                           
+        public async Task<TaskCompletionSource<IMessageContext>> EnqueueAsync(IMessageContext messageWrapper)
+        {
             using (var tx = this.StateManager.CreateTransaction())
             {
                 try
                 {
-                    var signal = new TaskCompletionSource<MessageWrapper>();
-                    await this.reliableDictionary.AddAsync(tx, messageWrapper.AsyncSignalRefKey, signal);
-                    await this.reliableQueue.EnqueueAsync(tx, messageWrapper);
+                    var signal = new TaskCompletionSource<IMessageContext>();
+                    await _reliableDictionary.AddAsync(tx, messageWrapper.AsyncSignalRefKey, signal);
+                    await _reliableQueue.EnqueueAsync(tx,
+                        new MessageWrapper
+                        {
+                            MessageContext = messageWrapper
+                        });
                     await tx.CommitAsync();
                     return signal;
 
-                }     catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     throw e;
                 }
-                
+
             }
         }
 
-        public async Task<MessageWrapper> DequeueAsync()
+        public async Task<IMessageContext> DequeueAsync()
         {
             using (var tx = this.StateManager.CreateTransaction())
             {
-                var result = await reliableQueue.TryDequeueAsync(tx);
+                var result = await _reliableQueue.TryDequeueAsync(tx);
                 var context = result.HasValue ? result.Value : null;
-                return context;
+                return context.MessageContext;
             }
         }
 
-        public Task<MessageWrapper> PeekAsync()
+        public Task<IMessageContext> PeekAsync()
         {
             return null;
         }

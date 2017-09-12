@@ -10,16 +10,16 @@ namespace SF.Async.Operation.Usage
 {
     public class SampleService: OccupantBase<string, string>, ISampleService
     {
-        public SampleService(IQueue<MessageWrapper> service) : base(service) { }
+        public SampleService(IQueue<IMessageContext> service) : base(service) { }
 
         public Task<string> GetSampleAsyncResult(string message)
         {
             return base.GetResultAsync(message);
         }
 
-        public override MessageWrapper Req2Wrapper(string input)
+        public override IMessageContext Req2Wrapper(string input)
         {
-            var wrapper = new MessageWrapper
+            var wrapper = new MessageContext
             {
                 AsyncSignalRefKey = Guid.NewGuid().ToString(),
                 MessageBody = input
@@ -28,7 +28,7 @@ namespace SF.Async.Operation.Usage
             return wrapper;
         }
 
-        public override string Wrapper2Res(MessageWrapper input)
+        public override string Wrapper2Res(IMessageContext input)
         {
             return input.MessageRes;
         }

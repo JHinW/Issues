@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common
 {
-    public interface IMessageWrapper
+    public interface IMessageContext
     {
         string AsyncSignalRefKey { get; set; }
 
