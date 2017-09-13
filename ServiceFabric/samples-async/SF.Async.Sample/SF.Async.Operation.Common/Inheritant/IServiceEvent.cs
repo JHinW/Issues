@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common
 {
-    public interface ISignalSource
+    public interface IServiceEvent
     {
-        void SetResult(IMessageWrapper messageWrapper);
+        void LogEvents(string log);
     }
 }

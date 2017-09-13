@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SF.Async.Operation.Usage;
+using SF.Async.Operation.Usage.Extensions;
 
 namespace SF.Async.StateFulQueue
 {
@@ -20,8 +22,23 @@ namespace SF.Async.StateFulQueue
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("SF.Async.StateFulQueueType",
-                    context => new StateFulQueue(context)).GetAwaiter().GetResult();
+                ServiceRuntime.RegisterServiceAsync(
+                    "SF.Async.StateFulQueueType",
+                    context => new StateFulDefaultBuilder(context)
+                    .ConfigureEntry(builder =>
+                    {
+                        builder.UseCompEx(message =>
+                        {
+                            message.MessageRes = "hello world!";
+                            message.SignalSource.SetResult(message);
+                            return Task.CompletedTask;
+                        });
+                    }).ConfigureLogger(logString =>
+                    {
+                        ServiceEventSource.Current.ServiceMessage(context, "Current Counter Value: {0}", logString);
+                    })
+                    .Build<StateFulQueue>()
+                    ).GetAwaiter().GetResult();
 
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(StateFulQueue).Name);
 

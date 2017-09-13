@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SF.Async.Operation.Common.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common.Abstractions
 {
-    public abstract class LogicEntryBuilderBase : ILogicEntryBuilder
+
+    public abstract class LogicEntryBuilderBase : IMessageEntryBuilder
     {
         private AfterMessageDelegate _afterMessageDelegate;
 
@@ -15,10 +17,9 @@ namespace SF.Async.Operation.Common.Abstractions
 
         private MessageDelegate _messageDelegate;
 
-
         private SemaphoreSlim _metex = new SemaphoreSlim(10);
 
-        public virtual ILogicEntry Build()
+        public virtual IMessageEntry MessageEntryBuild()
         {
             var entry = new LogicEntryBase(async (context) => {
                 try
@@ -42,19 +43,19 @@ namespace SF.Async.Operation.Common.Abstractions
             return entry;
         }
 
-        public virtual ILogicEntryBuilder SpecifyAfter(AfterMessageDelegate afterMessageDelegate)
+        public virtual IMessageEntryBuilder SpecifyAfter(AfterMessageDelegate afterMessageDelegate)
         {
             _afterMessageDelegate = afterMessageDelegate;
             return this;
         }
 
-        public virtual ILogicEntryBuilder SpecifyBefore(BeforeMessageDelegate beforeMessageDelegate)
+        public virtual IMessageEntryBuilder SpecifyBefore(BeforeMessageDelegate beforeMessageDelegate)
         {
             _beforeMessageDelegate = beforeMessageDelegate;
             return this;
         }
 
-        public ILogicEntryBuilder SpecifyDelegate(MessageDelegate messageDelegate)
+        public IMessageEntryBuilder SpecifyDelegate(MessageDelegate messageDelegate)
         {
             _messageDelegate = messageDelegate;
             return this;

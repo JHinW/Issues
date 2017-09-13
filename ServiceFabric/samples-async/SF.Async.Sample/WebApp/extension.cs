@@ -13,15 +13,15 @@ namespace WebApp
     public static class extension
     {
 
-        public static ISampleService GetStateFulService(this Controller ctrl, Uri serviceName)
+        public static IOccupantService GetStateFulService(this Controller ctrl, Uri serviceName)
         {
-            ISampleService queueService = null;
+            IOccupantService queueService = null;
 
             while (queueService == null)
             {
                 try
                 {
-                    queueService = ServiceProxy.Create<ISampleService>(serviceName, new ServicePartitionKey(1));
+                    queueService = ServiceProxy.Create<IOccupantService>(serviceName, new ServicePartitionKey(1));
                 }
                 catch
                 {

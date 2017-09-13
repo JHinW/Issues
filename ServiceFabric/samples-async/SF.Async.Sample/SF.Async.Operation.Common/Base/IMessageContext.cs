@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common
+namespace SF.Async.Operation.Common.Base
 {
-    public interface IMessageWrapper
+    public interface IMessageContext
     {
         string AsyncSignalRefKey { get; set; }
 

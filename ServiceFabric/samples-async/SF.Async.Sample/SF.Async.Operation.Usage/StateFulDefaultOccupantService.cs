@@ -1,25 +1,23 @@
 ﻿using SF.Async.Operation.Common;
 using SF.Async.Operation.Common.Abstractions;
+using SF.Async.Operation.Common.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Usage
 {
-    public class SampleService: OccupantBase<string, string>, ISampleService
+    public class StateFulDefaultOccupantService : OccupantBase<string, string>, IOccupantService
     {
-        public SampleService(IQueue<MessageWrapper> service) : base(service) { }
+        public StateFulDefaultOccupantService(IQueue<IMessageContext> service) : base(service) { }
 
         public Task<string> GetSampleAsyncResult(string message)
         {
             return base.GetResultAsync(message);
         }
 
-        public override IMessageWrapper Req2Wrapper(string input)
+        public override IMessageContext Req2Wrapper(string input)
         {
-            var wrapper = new MessageWrapper
+            var wrapper = new MessageContext
             {
                 AsyncSignalRefKey = Guid.NewGuid().ToString(),
                 MessageBody = input
@@ -28,7 +26,7 @@ namespace SF.Async.Operation.Usage
             return wrapper;
         }
 
-        public override string Wrapper2Res(IMessageWrapper input)
+        public override string Wrapper2Res(IMessageContext input)
         {
             return input.MessageRes;
         }
