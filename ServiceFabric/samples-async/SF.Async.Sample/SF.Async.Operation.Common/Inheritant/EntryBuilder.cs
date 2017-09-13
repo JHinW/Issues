@@ -1,29 +1,29 @@
-﻿using System;
+﻿using SF.Async.Operation.Common.Abstractions;
+using SF.Async.Operation.Common.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common.Abstractions
+namespace SF.Async.Operation.Common.Inheritant
 {
     using MessageDelegateComp = Func<MessageDelegate, MessageDelegate>;
 
-    public class EntryBuilder: LogicEntryBuilderBase
+    public class EntryBuilder: LogicEntryBuilderBase, IEntryBuilder
     {
         private IList<MessageDelegateComp> _messageDelegateCompList = new List<MessageDelegateComp>();
 
         public EntryBuilder()
         {
-
         }
 
-        public ILogicEntryBuilder UseComp(MessageDelegateComp comp)
+        public IEntryBuilder UseComp(MessageDelegateComp messageDelegateComp)
         {
-            _messageDelegateCompList.Add(comp);
+            _messageDelegateCompList.Add(messageDelegateComp);
             return this;
         }
 
-        public override ILogicEntry Build()
+        public IMessageEntry EntryBuild()
         {
             this.SpecifyAfter(context => { });
             this.SpecifyBefore(context => { });
@@ -39,8 +39,7 @@ namespace SF.Async.Operation.Common.Abstractions
             }
             this.SpecifyDelegate(app);
 
-            return base.Build();
+            return base.MessageEntryBuild();
         }
-
     }
 }

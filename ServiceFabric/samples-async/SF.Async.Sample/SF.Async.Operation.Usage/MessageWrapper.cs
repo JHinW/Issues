@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SF.Async.Operation.Common.Base;
 using System.Runtime.Serialization;
 
 namespace SF.Async.Operation.Common

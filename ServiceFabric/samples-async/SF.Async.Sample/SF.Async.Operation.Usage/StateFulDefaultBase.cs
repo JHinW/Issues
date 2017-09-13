@@ -4,11 +4,10 @@ using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SF.Async.Operation.Common;
 using SF.Async.Operation.Common.Abstractions;
+using SF.Async.Operation.Common.Base;
 using System;
 using System.Collections.Generic;
 using System.Fabric;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,16 +20,16 @@ namespace SF.Async.Operation.Usage
 
         private IReliableDictionary<string, TaskCompletionSource<IMessageContext>> _reliableDictionary;
 
-        private ILogicEntry _logicEntry;
+        private IMessageEntry _messageEntry;
 
         private IServiceEvent _serviceEvent;
 
 
-        public StateFulDefaultBase(StatefulServiceContext context, IServiceEvent eventsource, ILogicEntry entry)
+        public StateFulDefaultBase(StatefulServiceContext context, IServiceEvent eventsource, IMessageEntry entry)
             : base(context)
         {
             _serviceEvent = eventsource;
-            _logicEntry = entry;
+            _messageEntry = entry;
         }
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace SF.Async.Operation.Usage
                     var context = messageWrapper.MessageContext;
                     try
                     {
-                        await _logicEntry.SendAsync(context);
+                        await _messageEntry.SendAsync(context);
                     }
                     catch (Exception e)
                     {
@@ -115,7 +114,7 @@ namespace SF.Async.Operation.Usage
             }
         }
 
-        public async Task<TaskCompletionSource<IMessageContext>> EnqueueAsync(IMessageContext messageWrapper)
+        public async Task<IMessageContext> EnqueueAsync(IMessageContext messageWrapper)
         {
             using (var tx = this.StateManager.CreateTransaction())
             {
@@ -129,7 +128,8 @@ namespace SF.Async.Operation.Usage
                             MessageContext = messageWrapper
                         });
                     await tx.CommitAsync();
-                    return signal;
+                    var ret = await signal.Task;
+                    return ret;
 
                 }
                 catch (Exception e)

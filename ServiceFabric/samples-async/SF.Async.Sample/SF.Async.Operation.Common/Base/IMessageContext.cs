@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common
+namespace SF.Async.Operation.Common.Base
 {
     public interface IMessageContext
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SF.Async.Operation.Common.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common.Abstractions
 {
-    public class LogicEntryBase : ILogicEntry
+    public class LogicEntryBase : IMessageEntry
     {
         public MessageDelegate _messageDelegate;
 

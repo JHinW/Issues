@@ -8,7 +8,7 @@ namespace SF.Async.Operation.Common
 {
     public interface IQueue<T>
     {
-        Task<TaskCompletionSource<T>> EnqueueAsync(T message);
+        Task<T> EnqueueAsync(T message);
 
         Task<T> DequeueAsync();
 

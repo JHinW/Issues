@@ -1,16 +1,12 @@
-﻿using SF.Async.Operation.Common;
-using SF.Async.Operation.Common.Abstractions;
+﻿using SF.Async.Operation.Common.Base;
+using SF.Async.Operation.Common.Inheritant;
 using System;
-using System.Collections.Generic;
 using System.Fabric;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Usage
 {
-    using EntryMiddleware = Func<EntryBuilder, EntryBuilder>;
-    
+    using EntryMiddleware = Action<IEntryBuilder>;
+
     public class StateFulDefaultBuilder
     {
         private StatefulServiceContext _statefulServiceContext;
@@ -40,15 +36,19 @@ namespace SF.Async.Operation.Usage
 
         public Tservice Build<Tservice>()
         {
-            if (_statefulServiceContext == null) throw new ArgumentNullException("No StatefulServiceContext");
+            if (_statefulServiceContext == null) throw new ArgumentNullException("No StatefulServiceContext setted");
 
-            if (_messageLogger == null) throw new ArgumentNullException("No messageLogger");
+            if (_messageLogger == null) throw new ArgumentNullException("No messageLogger setted setted");
 
-            if (_entryMiddleware == null) throw new ArgumentNullException("No entryMiddleware");
+            if (_entryMiddleware == null) throw new ArgumentNullException("No entryMiddleware setted");
 
-            var entry = _entryMiddleware(new EntryBuilder()).Build();
+            var entry = new EntryBuilder();
 
-            return  (Tservice)Activator.CreateInstance(typeof(Tservice), _statefulServiceContext, _messageLogger, entry);
+            _entryMiddleware(entry);
+
+
+
+            return  (Tservice)Activator.CreateInstance(typeof(Tservice), _statefulServiceContext, new ServiceEvent(_messageLogger), entry.EntryBuild());
         }
     }
 }

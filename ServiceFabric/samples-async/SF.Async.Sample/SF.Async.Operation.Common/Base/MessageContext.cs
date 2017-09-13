@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common
+namespace SF.Async.Operation.Common.Base
 {
     [DataContract(Name = "MessageContext")]
     [KnownType(typeof(IMessageContext))]

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SF.Async.Operation.Common.Base;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common.Abstractions
+namespace SF.Async.Operation.Common
 {
     public abstract class OccupantBase<TReq, TRes> : IOccupant<TReq, TRes>
     {
@@ -19,8 +16,8 @@ namespace SF.Async.Operation.Common.Abstractions
         {
            return Task.Run(async () => {
                 var result = await _queueService.EnqueueAsync(Req2Wrapper(message));
-                var wrapper = await result.Task;
-                return Wrapper2Res(wrapper);
+ 
+                return Wrapper2Res(result);
             });
         }
 

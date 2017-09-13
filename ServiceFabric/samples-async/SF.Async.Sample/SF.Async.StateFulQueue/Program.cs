@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SF.Async.Operation.Usage;
+using SF.Async.Operation.Usage.Extensions;
 
 namespace SF.Async.StateFulQueue
 {
@@ -26,9 +27,12 @@ namespace SF.Async.StateFulQueue
                     context => new StateFulDefaultBuilder(context)
                     .ConfigureEntry(builder =>
                     {
-                        //builder
-                        //builder.
-                        return builder;
+                        builder.UseCompEx(message =>
+                        {
+                            message.MessageRes = "hello world!";
+                            message.SignalSource.SetResult(message);
+                            return Task.CompletedTask;
+                        });
                     }).ConfigureLogger(logString =>
                     {
                         ServiceEventSource.Current.ServiceMessage(context, "Current Counter Value: {0}", logString);

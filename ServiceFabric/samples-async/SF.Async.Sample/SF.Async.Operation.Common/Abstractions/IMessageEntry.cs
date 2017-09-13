@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SF.Async.Operation.Common.Base;
 using System.Threading.Tasks;
 
-namespace SF.Async.Operation.Common
+namespace SF.Async.Operation.Common.Abstractions
 {
-    public interface ILogicEntry
+    public interface IMessageEntry
     {
         //MessageDelegate MessageDelegate { get; set; }
 

@@ -1,14 +1,12 @@
 ﻿using SF.Async.Operation.Common;
 using SF.Async.Operation.Common.Abstractions;
+using SF.Async.Operation.Common.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Usage
 {
-    public class StateFulDefaultOccupantService : OccupantBase<string, string>, ISampleService
+    public class StateFulDefaultOccupantService : OccupantBase<string, string>, IOccupantService
     {
         public StateFulDefaultOccupantService(IQueue<IMessageContext> service) : base(service) { }
 
