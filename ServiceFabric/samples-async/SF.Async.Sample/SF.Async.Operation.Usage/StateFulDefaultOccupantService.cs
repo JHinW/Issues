@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Usage
 {
-    public class SampleService: OccupantBase<string, string>, ISampleService
+    public class StateFulDefaultOccupantService : OccupantBase<string, string>, ISampleService
     {
-        public SampleService(IQueue<IMessageContext> service) : base(service) { }
+        public StateFulDefaultOccupantService(IQueue<IMessageContext> service) : base(service) { }
 
         public Task<string> GetSampleAsyncResult(string message)
         {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common.Abstractions
 {
+
     public abstract class LogicEntryBuilderBase : ILogicEntryBuilder
     {
         private AfterMessageDelegate _afterMessageDelegate;
@@ -14,7 +15,6 @@ namespace SF.Async.Operation.Common.Abstractions
         private BeforeMessageDelegate _beforeMessageDelegate;
 
         private MessageDelegate _messageDelegate;
-
 
         private SemaphoreSlim _metex = new SemaphoreSlim(10);
 

@@ -13,4 +13,7 @@ namespace SF.Async.Operation.Common
     public delegate void AfterMessageDelegate(IMessageContext context);
 
     public delegate IMessageContext MessageProduceDelegate();
+
+
+    public delegate void MessageLogger(string log);
 }
