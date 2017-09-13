@@ -23,3 +23,17 @@ https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/
 2. Await is like a unary operator: it takes a single      argument, an awaitable (an “awaitable” is an           asynchronous operation).
 
 3. read this link: https://ericlippert.com/2013/02/21/monads-part-one/
+
+
+**semaphoreslim**  
+https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx  
+1. Represents a lightweight alternative to Semaphore that limits the number of threads that can access a resource or pool of resources concurrently.  
+
+
+**manualresetevent**
+https://msdn.microsoft.com/en-us/library/system.threading.manualresetevent(v=vs.110).aspx  
+1. Notifies one or more waiting threads that an event has occurred. This class cannot be inherited.
+
+2. Reset(): Sets the state of the event to nonsignaled, causing threads to block.(Inherited from EventWaitHandle.)
+
+3. Set(): Sets the state of the event to signaled, allowing one or more waiting threads to proceed.
