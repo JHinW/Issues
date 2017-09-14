@@ -25,11 +25,11 @@ namespace SF.Async.Operation.Usage
         private IServiceEvent _serviceEvent;
 
 
-        public StateFulDefaultBase(StatefulServiceContext context, IServiceEvent eventsource, IMessageEntry entry)
+        public StateFulDefaultBase(StatefulServiceContext context, IServiceEvent eventsource, IMessageEntry messageEntry)
             : base(context)
         {
             _serviceEvent = eventsource;
-            _messageEntry = entry;
+            _messageEntry = messageEntry;
         }
 
         /// <summary>

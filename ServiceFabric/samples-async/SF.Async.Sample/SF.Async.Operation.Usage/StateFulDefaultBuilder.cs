@@ -38,7 +38,7 @@ namespace SF.Async.Operation.Usage
         {
             if (_statefulServiceContext == null) throw new ArgumentNullException("No StatefulServiceContext setted");
 
-            if (_messageLogger == null) throw new ArgumentNullException("No messageLogger setted setted");
+            if (_messageLogger == null) throw new ArgumentNullException("No messageLogger setted");
 
             if (_entryMiddleware == null) throw new ArgumentNullException("No entryMiddleware setted");
 
