@@ -7,8 +7,11 @@ using static SF.Async.Core.Delegates;
 
 namespace SF.Async.Core
 {
-    public interface IFollowing
+    public interface IOperation<TImmutable>
     {
-        Task CatchAsync(Immutables immutable, BackResult backDelegate);
+        Task<TImmutable> EnqueueAsync(TImmutable immutable);
+
+
+        Task ValueAsync(TImmutable immutables);
     }
 }

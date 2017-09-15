@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Core
 {
-    public class MessageBox: IMessage
+    public class MessageBox: IMessageBox
     {
-        public string Id { get; set; }
+        public string ID { get; }
 
         public string Type { get; set; }
 

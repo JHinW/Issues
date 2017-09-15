@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Core
 {
-    public interface IMessage: IData
+    public interface IServiceEvent
     {
-        string Type { get; set; }
-
-        string PayLoad { get; set; }
+        void LogEvents(string log);
     }
 }

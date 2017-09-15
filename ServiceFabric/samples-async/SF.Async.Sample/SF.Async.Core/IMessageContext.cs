@@ -7,8 +7,10 @@ using static SF.Async.Core.Delegates;
 
 namespace SF.Async.Core
 {
-    public interface IFollowing
+    public interface IMessageContext: IData
     {
-        Task CatchAsync(Immutables immutable, BackResult backDelegate);
+        Immutables Immutables { get; set; }
+
+        BackResult BackResult { get; set; }
     }
 }

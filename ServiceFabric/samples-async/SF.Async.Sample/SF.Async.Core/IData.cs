@@ -8,5 +8,6 @@ namespace SF.Async.Core
 {
     public interface IData
     {
+        string ID { get;}
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Core
 {
-    public interface IQueue<TImmutable>
+    public interface IMessageBox: IData
     {
-        Task<TImmutable> EnqueueAsync(TImmutable immutable);
+        string Type { get; set; }
+
+        string PayLoad { get; set; }
     }
 }
