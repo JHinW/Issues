@@ -10,7 +10,7 @@ namespace SF.Async.StateFulQueue
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    public class StateFulQueue : StateFulDefaultUsage
+    public class StateFulQueue : StateFulDefaultUsage<MyTransferer>
     {
         public StateFulQueue(StatefulServiceContext context, Core.IServiceEvent eventsource, IFollowing entry)
             : base(context, eventsource, entry)

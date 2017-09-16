@@ -87,6 +87,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyTransferer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OccupantImpl.cs" />
     <Compile Include="StateFulQueue.cs" />

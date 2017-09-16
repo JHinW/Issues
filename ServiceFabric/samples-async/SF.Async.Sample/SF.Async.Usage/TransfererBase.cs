@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Usage
 {
-    public class TransferService : ITransfer
+    public abstract class TransfererBase : ITransferer
     {
 
         private IOperation<Immutables> _operation;
 
-        public TransferService(IOperation<Immutables> operation)
+        public TransfererBase(IOperation<Immutables> operation)
         {
             _operation = operation;
         }

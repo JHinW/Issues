@@ -14,15 +14,15 @@ namespace WebApp
     public static class Extension
     {
 
-        public static ITransfer GetStateFulService(this Controller ctrl, Uri serviceName)
+        public static ITransferer GetStateFulService(this Controller ctrl, Uri serviceName)
         {
-            ITransfer queueService = null;
+            ITransferer queueService = null;
 
             while (queueService == null)
             {
                 try
                 {
-                    queueService = ServiceProxy.Create<ITransfer>(serviceName, new ServicePartitionKey(1));
+                    queueService = ServiceProxy.Create<ITransferer>(serviceName, new ServicePartitionKey(1));
                 }
                 catch
                 {

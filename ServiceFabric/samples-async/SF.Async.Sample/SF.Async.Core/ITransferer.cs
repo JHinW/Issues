@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Core
 {
-    public interface ITransfer: IService
+    public interface ITransferer: IService
     {
         Task<Immutables> DataAsync(Immutables immutables);
 

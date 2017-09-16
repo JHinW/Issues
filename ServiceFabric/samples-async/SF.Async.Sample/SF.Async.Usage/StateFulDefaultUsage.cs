@@ -1,5 +1,6 @@
 ﻿using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting;
 using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SF.Async.Core;
@@ -15,7 +16,8 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Usage
 {
-    public abstract class StateFulDefaultUsage: StatefulService, IOperation<Immutables>
+    public abstract class StateFulDefaultUsage<Ttranserer>: StatefulService, IOperation<Immutables> 
+        where Ttranserer: IService
     {
         private IReliableQueue<Immutables> _reliableQueue;
 
@@ -24,6 +26,8 @@ namespace SF.Async.Usage
         private IFollowing _following;
 
         private IServiceEvent _serviceEvent;
+
+        //private Type _transfererType;
 
 
         public StateFulDefaultUsage(StatefulServiceContext context, IServiceEvent eventsource, IFollowing following)
@@ -38,7 +42,8 @@ namespace SF.Async.Usage
             yield return new ServiceReplicaListener(context =>
             {
 
-                return new FabricTransportServiceRemotingListener(context, new TransferService(this));
+                return new FabricTransportServiceRemotingListener(context,
+                    (Ttranserer)Activator.CreateInstance(typeof(Ttranserer), this) );
             }, "StateFulQueueFabricTransportServiceRemotingListener");
         }
 
@@ -112,7 +117,7 @@ namespace SF.Async.Usage
             }
         }
 
-        public async Task ValueAsync(Immutables immutables)
+        public async virtual Task ValueAsync(Immutables immutables)
         {
             using (var tx = StateManager.CreateTransaction())
             {
