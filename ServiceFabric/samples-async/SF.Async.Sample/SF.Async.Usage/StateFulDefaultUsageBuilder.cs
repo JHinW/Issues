@@ -1,13 +1,14 @@
-﻿using SF.Async.Operation.Common.Base;
-using SF.Async.Operation.Common.Inheritant;
+﻿
+using SF.Async.Core.Builder;
 using System;
 using System.Fabric;
+using static SF.Async.Core.Delegates;
 
-namespace SF.Async.Operation.Usage
+namespace SF.Async.Usage
 {
-    using EntryMiddleware = Action<IEntryBuilder>;
+    using EntryMiddleware = Action<FollowingBuilder>;
 
-    public class StateFulDefaultBuilder
+    public class StateFulDefaultUsageBuilder
     {
         private StatefulServiceContext _statefulServiceContext;
 
@@ -15,19 +16,19 @@ namespace SF.Async.Operation.Usage
 
         private EntryMiddleware _entryMiddleware;
 
-        public StateFulDefaultBuilder(StatefulServiceContext statefulServiceContext)
+        public StateFulDefaultUsageBuilder(StatefulServiceContext statefulServiceContext)
         {
             _statefulServiceContext = statefulServiceContext;
         }
 
-        public StateFulDefaultBuilder ConfigureLogger(MessageLogger logger)
+        public StateFulDefaultUsageBuilder ConfigureLogger(MessageLogger logger)
         {
             _messageLogger = logger;
             return this;
         }
 
 
-        public StateFulDefaultBuilder ConfigureEntry(EntryMiddleware entryMiddleware)
+        public StateFulDefaultUsageBuilder ConfigureEntry(EntryMiddleware entryMiddleware)
         {
 
             _entryMiddleware = entryMiddleware;
@@ -42,13 +43,15 @@ namespace SF.Async.Operation.Usage
 
             if (_entryMiddleware == null) throw new ArgumentNullException("No entryMiddleware setted");
 
-            var entry = new EntryBuilder();
+            var builder = new FollowingBuilder();
 
-            _entryMiddleware(entry);
+            _entryMiddleware(builder);
 
-
-
-            return  (Tservice)Activator.CreateInstance(typeof(Tservice), _statefulServiceContext, new ServiceEvent(_messageLogger), entry.EntryBuild());
+            return  (Tservice)Activator.CreateInstance(
+                typeof(Tservice),
+                _statefulServiceContext, 
+                new ServiceEvent(_messageLogger),
+                builder.FollowingBuild<FollowingUsage>());
         }
     }
 }

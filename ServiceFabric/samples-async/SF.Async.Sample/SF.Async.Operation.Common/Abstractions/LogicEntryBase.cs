@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SF.Async.Operation.Common.Abstractions
 {
-    public class LogicEntryBase : IMessageEntry
+    public class MessageEntryBase : IMessageEntry
     {
         public MessageDelegate _messageDelegate;
 
 
-        public LogicEntryBase(MessageDelegate messageDelegate)
+        public MessageEntryBase(MessageDelegate messageDelegate)
         {
             _messageDelegate = messageDelegate;
         }

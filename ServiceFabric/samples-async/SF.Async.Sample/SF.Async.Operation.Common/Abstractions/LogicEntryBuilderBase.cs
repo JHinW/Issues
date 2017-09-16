@@ -21,7 +21,7 @@ namespace SF.Async.Operation.Common.Abstractions
 
         public virtual IMessageEntry MessageEntryBuild()
         {
-            var entry = new LogicEntryBase(async (context) => {
+            var entry = new MessageEntryBase(async (context) => {
                 try
                 {
                     await _metex.WaitAsync();

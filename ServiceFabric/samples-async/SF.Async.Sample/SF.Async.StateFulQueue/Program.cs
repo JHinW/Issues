@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
-using SF.Async.Operation.Usage;
-using SF.Async.Operation.Usage.Extensions;
+using SF.Async.Usage;
+using SF.Async.Usage.Extensions;
 
 namespace SF.Async.StateFulQueue
 {
@@ -24,13 +24,12 @@ namespace SF.Async.StateFulQueue
 
                 ServiceRuntime.RegisterServiceAsync(
                     "SF.Async.StateFulQueueType",
-                    context => new StateFulDefaultBuilder(context)
+                    context => new StateFulDefaultUsageBuilder(context)
                     .ConfigureEntry(builder =>
                     {
-                        builder.UseCompEx(message =>
+                        builder.UseFollowerEx(message =>
                         {
-                            message.MessageRes = "hello world!";
-                            message.SignalSource.SetResult(message);
+                            message.BackResult(message.Immutables);
                             return Task.CompletedTask;
                         });
                     }).ConfigureLogger(logString =>

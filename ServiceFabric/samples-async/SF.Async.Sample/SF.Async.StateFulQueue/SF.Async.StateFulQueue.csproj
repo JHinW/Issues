@@ -87,6 +87,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyTransferer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OccupantImpl.cs" />
     <Compile Include="StateFulQueue.cs" />
@@ -100,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SF.Async.Core\SF.Async.Core.csproj">
+      <Project>{7761998A-5F67-4A68-9D8D-40D7C962A5E8}</Project>
+      <Name>SF.Async.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SF.Async.Operation.Common\SF.Async.Operation.Common.csproj">
       <Project>{567D9CFD-B8C3-4F5F-BE82-B1F584D88B59}</Project>
       <Name>SF.Async.Operation.Common</Name>
@@ -107,6 +112,10 @@
     <ProjectReference Include="..\SF.Async.Operation.Usage\SF.Async.Operation.Usage.csproj">
       <Project>{6E3115AE-1FEE-4D68-8DCA-45A909B99BC1}</Project>
       <Name>SF.Async.Operation.Usage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SF.Async.Usage\SF.Async.Usage.csproj">
+      <Project>{46106741-6A6F-4AA8-A866-39291B25DC43}</Project>
+      <Name>SF.Async.Usage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

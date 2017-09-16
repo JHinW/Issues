@@ -12,13 +12,10 @@ namespace SF.Async.Operation.Common
             _queueService = queueService;
         }
 
-        public Task<TRes> GetResultAsync(TReq message)
+        public async Task<TRes> GetResultAsync(TReq message)
         {
-           return Task.Run(async () => {
-                var result = await _queueService.EnqueueAsync(Req2Wrapper(message));
- 
-                return Wrapper2Res(result);
-            });
+            var result = await _queueService.EnqueueAsync(Req2Wrapper(message));
+            return Wrapper2Res(result);
         }
 
         public virtual IMessageContext Req2Wrapper(TReq input)

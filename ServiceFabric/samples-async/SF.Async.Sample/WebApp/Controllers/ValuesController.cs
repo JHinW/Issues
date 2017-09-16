@@ -20,9 +20,9 @@ namespace WebApp.Controllers
             var service = this.GetStateFulService(new Uri(serviceName));
             try
             {
-                var result = await service.GetSampleAsyncResult("ssss");
+                var result = await service.DataFromBasicTypeAsync("ssss");
 
-                return new string[] { "value1", result };
+                return new string[] { "value1", result.ID };
 
             }   catch(Exception e)
             {
