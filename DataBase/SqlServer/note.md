@@ -27,3 +27,12 @@ https://docs.microsoft.com/en-us/sql/t-sql/statements/set-nocount-transact-sql
 **isolation level**   
 https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/transaction-isolation-levels  
 
+
+
+**sql online**  
+https://data.stackexchange.com/stackoverflow/query/497432  
+
+**rows to column**  
+https://stackoverflow.com/questions/15745042/efficiently-convert-rows-to-columns-in-sql-server  
+
+
