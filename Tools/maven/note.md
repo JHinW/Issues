@@ -3,4 +3,4 @@
 
 name : Settings.xml
 
-url : [Context](/Settings.xml)
+url : [Context](/Tools/maven/Settings.xml)
